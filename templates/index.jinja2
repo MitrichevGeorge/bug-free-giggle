@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASCII Animation Server</title>
+    <style>
+        body { font-family: Consolas, monospace; margin: 20px; }
+        pre { background: #f0f0f0; padding: 10px; }
+        button { margin-left: 10px; }
+        ul { list-style-type: none; padding: 0; }
+        li { margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <h1>ASCII Animation Server</h1>
+    <h3>CURL команда для просмотра анимации:</h3>
+    <pre id="curl-command">curl http://localhost:8000/1/</pre>
+    <button onclick="copyCommand()">Скопировать</button>
+    <h3>Доступные анимации:</h3>
+    <ul>
+        {% for anim in animations %}
+            <li><a href="/{{ anim }}/">{{ anim }}.txt</a></li>
+        {% endfor %}
+    </ul>
+    <h3>Инструкция:</h3>
+    <p>1. Откройте терминал (win+R, cmd - на windows или Ctrl+Alt+T - на debian/ubuntu/arch)</p>
+    <p>2. Скопируйте команду выше</p>
+    <p>3. Вставьте её в терминал и нажмите Enter</p>
+    <script>
+        function copyCommand() {
+            const text = document.getElementById("curl-command").innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Команда скопирована!");
+            });
+        }
+    </script>
+</body>
+</html>
